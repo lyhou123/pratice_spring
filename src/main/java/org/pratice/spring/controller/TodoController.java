@@ -56,20 +56,11 @@ public class TodoController {
         return "redirect:/todo";
     }
     @GetMapping("/todo/search")
-    public String searchTodos(@RequestParam(name = "task", required = false) String task,
-                              @RequestParam(name = "isDone", required = false) Boolean isDone,
+    public String searchTodos(@RequestParam(required = false,defaultValue ="") String task,
+                              @RequestParam(required = false) Boolean isDone,
                               Model model) {
-        List<Todo> todos;
-        if (task != null && !task.isEmpty()) {
-            if (isDone != null) {
-                todos = todoService.searchTodos(task, isDone);
-            } else {
-                todos = todoService.searchTodos(task,false);
-            }
-        } else {
-            todos = todoService.getAllTodos();
-        }
-        model.addAttribute("todos", todos);
+
+        model.addAttribute("todos", todoService.checkUrl(task,isDone));
         return "index";
     }
 }

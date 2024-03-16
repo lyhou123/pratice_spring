@@ -13,6 +13,7 @@ public interface TodoService {
         public void editTodo(Todo todo) ;
 
         public void deleteTodoById(int id);
+        public List<Todo> checkUrl(String task,Boolean isDone);
         public List<Todo> searchTodos(String task, boolean isDone);
     }
 

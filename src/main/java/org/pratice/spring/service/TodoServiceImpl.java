@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class TodoServiceImpl implements TodoService{
@@ -37,6 +36,18 @@ public class TodoServiceImpl implements TodoService{
                         () -> {
                             throw new IllegalArgumentException("Todo with ID " + todo.getId() + " not found");
                         });
+    }
+    public List<Todo> checkUrl(String task, Boolean isDone)
+    {
+        if (task != null && !task.isEmpty()) {
+            if (isDone != null) {
+            return searchTodos(task, isDone);
+            } else {
+            return  searchTodos(task,false);
+            }
+        } else {
+         return getAllTodos();
+        }
     }
     public void deleteTodoById(int id) {
         todoList.removeIf(todo -> todo.getId() == id);
